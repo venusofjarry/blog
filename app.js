@@ -3,6 +3,8 @@ const home = require('./route/home')
 const admin = require('./route/admin')
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const template = require('art-template');
+const dateFormat = require('dateformat');
 const path = require('path');
 const app = express();
 
@@ -11,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'art');
 app.engine('art', require('express-art-template'));
+template.defaults.imports.dateFormat = dateFormat;
 
 app.use(session({secret: 'secret key'}));
 
